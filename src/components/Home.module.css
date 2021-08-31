@@ -5,10 +5,66 @@
   height: 100%;
   width: 100%;
   opacity: 0.95;
+  z-index: -1;
 }
 
 .bgVideoContent {
   height: 100%;
   width: 100%;
   object-fit: cover;
+}
+
+.inputContainer {
+  position: relative;
+}
+
+.elementCenter {
+  margin: auto;
+  display: block;
+  border-radius: 50px;
+  padding: 1rem;
+  width: 50%;
+}
+
+.input {
+  height: 3rem;
+  border: 1px solid #ffffff;
+  padding-left: 3rem;
+}
+
+input[type="search"]:focus {
+  outline: 0;
+}
+
+.inputSection {
+  position: relative;
+}
+
+.icon {
+  position: absolute;
+  left: 26.5vw;
+  top: 15px;
+}
+
+.night-icon {
+  color: $mainFontColor;
+}
+
+@keyframes input-anime {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-330px);
+  }
+}
+
+.input-anime {
+  position: relative;
+  opacity: 1;
+  animation-name: input-anime;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
 }
