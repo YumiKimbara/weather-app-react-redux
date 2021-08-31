@@ -47,24 +47,5 @@ input[type="search"]:focus {
 }
 
 .night-icon {
-  color: $mainFontColor;
-}
-
-@keyframes input-anime {
-  0% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(-330px);
-  }
-}
-
-.input-anime {
-  position: relative;
-  opacity: 1;
-  animation-name: input-anime;
-  animation-duration: 2s;
-  animation-fill-mode: forwards;
+  color: #484848;
 }

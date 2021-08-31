@@ -1,6 +1,6 @@
 import classes from "./Home.module.css";
 
-import WeatherModal from "./WeatherModal";
+import Weather from "./Weather";
 
 const Home = () => {
   const sunnyBg = "/bg-video/sunny.mp4";
@@ -35,6 +35,8 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Weather />
+
       <div class="attribute">
         <p>
           Icons made by
@@ -47,12 +49,6 @@ const Home = () => {
           </a>
         </p>
       </div>
-      <div class="modal-container hidden">
-        <i class="fas fa-times close-btn"></i>
-        <div class="modal"></div>
-      </div>
-      <div class="overlay hidden"></div>
-      <WeatherModal />
     </>
   );
 };
