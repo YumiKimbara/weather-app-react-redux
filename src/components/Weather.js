@@ -15,9 +15,9 @@ const Weather = () => {
   const dispatch = useDispatch();
 
   const api = {
-    // key: "f87193c8c1fceec76b7fc9727dfdd1da",
+    key: "f87193c8c1fceec76b7fc9727dfdd1da",
     //Nashさんのkey↓
-    key: "b2b86779f50b9bf6a8c0808905029f25",
+    // key: "b2b86779f50b9bf6a8c0808905029f25",
     base: "http://api.openweathermap.org/data/2.5/",
   };
 
@@ -132,7 +132,6 @@ const Weather = () => {
             <div>
               <h2 class="sub-title">Hourly Forecast - {weather.name}</h2>
             </div>
-
             <div id="scroll">
               <div
                 id="container-for-hourly-weather"

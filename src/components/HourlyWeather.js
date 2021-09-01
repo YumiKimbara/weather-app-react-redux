@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { weatherActions } from "../store/weather";
 
+import classes from "./HourlyWeather.module.css";
+
 const HourlyWeather = () => {
   const weather = useSelector((state) => state.weather.fetchedData);
   const hourlyWeather = useSelector((state) => state.weather.fetchedHoulyData);
@@ -16,14 +18,6 @@ const HourlyWeather = () => {
     key: "b2b86779f50b9bf6a8c0808905029f25",
     base: "http://api.openweathermap.org/data/2.5/",
   };
-
-  function localTime(t) {
-    return new Date().toLocaleString("en-US", {
-      timeZone: t.timezone,
-      timeStyle: "short",
-      hourCycle: "h24",
-    });
-  }
 
   let time = "";
   function getHourlyWeather(data, units) {
@@ -50,18 +44,50 @@ const HourlyWeather = () => {
 
   useEffect(() => {
     getHourlyWeather(weather, "metric");
-  }, []);
+  }, [weather]);
 
-  time = localTime(hourlyWeather).slice(0, 2);
-  let time2 = localTime(hourlyWeather).slice(3);
-  let time3 = time2[0] === "0" ? time2.slice(1) : time2;
+  // const renderHourlyContent = () => {
+  //   let result = [];
+  //   for (let i = 0; i < hourlyWeather.hourly.length - 24; i++) {
+  //     //get every hour
+  //     function localTime2(t) {
+  //       let nextHour = new Date();
+  //       nextHour.setHours(nextHour.getHours() + i);
+  //       return nextHour.toLocaleString("en-US", {
+  //         timeZone: t.timezone,
+  //         timeStyle: "short",
+  //         hourCycle: "h24",
+  //       });
+  //     }
+  //     let hourResult = +localTime2(hourlyWeather).slice(0, 2);
 
-  const renderHourlyContent = () => {
-    for (
-      let i = 0;
-      i < hourlyWeather.hourly && hourlyWeather.hourly.length - 24;
-      i++
-    ) {
+  //     let iconCode =
+  //       hourlyWeather.hourly && hourlyWeather.hourly[i].weather[0].icon;
+  //     const iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+
+  //     //   `<div>
+  //     //   <div class="content">
+  //     //     <p>{Math.round(hourlyWeather.hourly[i].temp)}°</p>
+  //     //     <img src={iconUrl} class="weather-icons" />
+  //     //     <p>
+  //     //       {hourResult <= 11
+  //     //         ? hourResult + "am"
+  //     //         : hourResult === 12
+  //     //         ? hourResult + "pm"
+  //     //         : hourResult >= 13 && hourResult <= 23
+  //     //         ? hourResult - 12 + "pm"
+  //     //         : (hourResult = 12 + "am")}
+  //     //     </p>
+  //     //   </div>
+  //     // </div>`;
+
+  //     return console.log(hourlyWeather.hourly);
+  //   }
+  // };
+
+  const hourResult =
+    hourlyWeather.hourly &&
+    hourlyWeather.hourly.map((item, i) => {
       //get every hour
       function localTime2(t) {
         let nextHour = new Date();
@@ -72,32 +98,72 @@ const HourlyWeather = () => {
           hourCycle: "h24",
         });
       }
-      let hourResult = +localTime2(hourlyWeather).slice(0, 2);
+      let hourTime = +localTime2(hourlyWeather).slice(0, 2);
+      return hourTime;
 
-      let iconCode =
+      // console.log(hourResult);
+
+      // let iconCode =
+      //   hourlyWeather.hourly && hourlyWeather.hourly[i].weather[0].icon;
+      // const iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+
+      // return (
+      //   <div>
+      //     <div class="content">
+      //       <p>{Math.round(hourlyWeather.hourly[i].temp)}°</p>
+      //       <img src={iconUrl} class="weather-icons" />
+      //       <p>
+      //         {hourResult <= 11
+      //           ? hourResult + "am"
+      //           : hourResult === 12
+      //           ? hourResult + "pm"
+      //           : hourResult >= 13 && hourResult <= 23
+      //           ? hourResult - 12 + "pm"
+      //           : (hourResult = 12 + "am")}
+      //       </p>
+      //     </div>
+      //   </div>
+      // );
+    });
+
+  const allTime = hourResult && hourResult.slice(0, 24);
+
+  let iconUrl =
+    allTime &&
+    allTime.map((item, i) => {
+      const iconCodes =
         hourlyWeather.hourly && hourlyWeather.hourly[i].weather[0].icon;
-      const iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
-      return `
-          <div>
-          <div class="content">
-            <p>${Math.round(hourlyWeather.hourly[i].temp)}°</p>
-            <img src="${iconUrl}"class="weather-icons" />
-            <p>${
-              hourResult <= 11
-                ? hourResult + "am"
-                : hourResult === 12
-                ? hourResult + "pm"
-                : hourResult >= 13 && hourResult <= 23
-                ? hourResult - 12 + "pm"
-                : (hourResult = 12 + "am")
-            }</p>
-          </div>
-          </div>
-        </div>`;
-    }
-  };
+      return "http://openweathermap.org/img/w/" + iconCodes + ".png";
+    });
 
-  return <h1>hourly weather</h1>;
+  return (
+    <>
+      <h1>hourly weather</h1>
+      {hourlyWeather.hourly && (
+        <div>
+          <div className={classes.content}>
+            {allTime.map((item, i) => {
+              return <p>{Math.round(hourlyWeather.hourly[i].temp)}°</p>;
+            })}
+            {iconUrl.map((icon, i) => {
+              return <img src={icon} class="weather-icons" />;
+            })}
+            {allTime.map((item) => {
+              return +item <= 11 ? (
+                <p>{item} am</p>
+              ) : +item === 12 ? (
+                <p>{item} pm</p>
+              ) : +item >= 13 && item <= 23 ? (
+                <p>{item - 12} pm</p>
+              ) : (
+                <p>12 am</p>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </>
+  );
 };
 
 export default HourlyWeather;
