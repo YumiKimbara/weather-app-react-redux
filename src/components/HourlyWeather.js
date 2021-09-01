@@ -140,26 +140,32 @@ const HourlyWeather = () => {
     <>
       <h1>hourly weather</h1>
       {hourlyWeather.hourly && (
-        <div>
-          <div className={classes.content}>
-            {allTime.map((item, i) => {
-              return <p>{Math.round(hourlyWeather.hourly[i].temp)}°</p>;
-            })}
-            {iconUrl.map((icon, i) => {
-              return <img src={icon} class="weather-icons" />;
-            })}
-            {allTime.map((item) => {
-              return +item <= 11 ? (
-                <p>{item} am</p>
-              ) : +item === 12 ? (
-                <p>{item} pm</p>
-              ) : +item >= 13 && item <= 23 ? (
-                <p>{item - 12} pm</p>
-              ) : (
-                <p>12 am</p>
-              );
-            })}
-          </div>
+        <div className={classes.scroll}>
+          {allTime.map((item, i) => {
+            {
+              console.log(item);
+            }
+            const iconCodes =
+              hourlyWeather.hourly && hourlyWeather.hourly[i].weather[0].icon;
+            return (
+              <div className={classes.content}>
+                <p>{Math.round(hourlyWeather.hourly[i].temp)}°</p>
+                <img
+                  src={"http://openweathermap.org/img/w/" + iconCodes + ".png"}
+                  class="weather-icons"
+                />
+                {item <= 11 ? (
+                  <p>{item} am</p>
+                ) : { item } === 12 ? (
+                  <p>{item} pm</p>
+                ) : { item } >= 13 && { item } <= 23 ? (
+                  <p>{item - 12} pm</p>
+                ) : (
+                  <p>12 am</p>
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
     </>

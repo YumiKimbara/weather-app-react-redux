@@ -1,7 +1,13 @@
 .content {
-  background-color: rgba(255, 255, 255, 0.5);
   text-align: center;
-  margin-top: 0.5rem;
-  padding: 0.5rem;
-  border-radius: 5px;
+}
+
+.content p {
+  margin: 0.5rem;
+}
+
+.scroll {
+  display: flex;
+  justify-content: flex-start;
+  overflow: scroll;
 }
