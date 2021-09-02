@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { weatherActions } from "../store/weather";
 
+import classes from "./WeeklyWeather.module.css";
+
 const WeeklyWeather = () => {
   const weather = useSelector((state) => state.weather.fetchedData);
   const weeklyWeather = useSelector((state) => state.weather.fetchedWeeklyData);
@@ -71,7 +73,7 @@ const WeeklyWeather = () => {
 
           return (
             <div>
-              <div class="content">
+              <div className={classes.content}>
                 <p>Max: {Math.round(weeklyWeather.daily[i].temp.max)}°</p>
                 <p>Min: {Math.round(weeklyWeather.daily[i].temp.min)}°</p>
                 <img

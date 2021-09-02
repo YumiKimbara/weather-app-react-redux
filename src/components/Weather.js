@@ -104,38 +104,42 @@ const Weather = () => {
                 , {localDate(hourlyWeather)}
               </p>
             </div>
-            <div className={classes.content}>
-              <p>{weather.name}</p>
-              <p>{weather.sys && regionNames.of(weather.sys.country)}</p>
-              <span id="current-temp">
-                {weather.main && Math.round(weather.main.temp)}
-                <span id="renderCandF">°C</span>
-              </span>
-              <div>
-                <button class="button" type="button" id="celsius">
-                  °C
-                </button>
-                <span> / </span>
-                <button class="button" type="button" id="fahrenheit">
-                  °F
-                </button>
-              </div>
-              <div class="content">
-                <p>{weather.weather && weather.weather[0].main}</p>
-                <p>
-                  feels like{" "}
-                  {weather.main && Math.round(weather.main.feels_like)}°
+            <div className={classes.mainContentWrapper}>
+              <div className={classes.content}>
+                <span>{weather.name}, </span>
+                <span>
+                  {weather.sys && regionNames.of(weather.sys.country)}
+                </span>
+                <p className={classes.currentTemp}>
+                  {weather.main && Math.round(weather.main.temp)}
+                  <span id="renderCandF">°C</span>
                 </p>
+                <div>
+                  <button class={classes.tempButton} type="button">
+                    °C
+                  </button>
+                  <span> / </span>
+                  <button class={classes.tempButton} type="button">
+                    °F
+                  </button>
+                </div>
+                <div class="content">
+                  <p>{weather.weather && weather.weather[0].main}</p>
+                  <p>
+                    feels like{" "}
+                    {weather.main && Math.round(weather.main.feels_like)}°
+                  </p>
+                </div>
               </div>
             </div>
             <div>
-              <h2 class="sub-title">Hourly Forecast - {weather.name}</h2>
+              <h3 class={classes.subTitle}>Hourly Forecast - {weather.name}</h3>
             </div>
             <div className={classes.scroll}>
               <HourlyWeather />
             </div>
             <div>
-              <h2 class="sub-title">Weekly Forecast - {weather.name}</h2>
+              <h3 class={classes.subTitle}>Weekly Forecast - {weather.name}</h3>
             </div>
             <div className={classes.scroll}>
               <WeeklyWeather />

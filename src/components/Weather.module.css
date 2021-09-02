@@ -3,6 +3,21 @@
   margin: 0 auto;
 }
 
+.subTitle {
+  margin-top: 2rem;
+}
+
+.currentTemp {
+  font-size: 28px;
+}
+
+.tempButton {
+  border: none;
+  background-color: transparent;
+  color: #484848;
+  cursor: pointer;
+}
+
 .modalContainer {
   width: 30rem;
   height: 20rem;
@@ -51,12 +66,18 @@
   opacity: 0;
 }
 
+.mainContentWrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .content {
   background-color: rgba(255, 255, 255, 0.5);
   text-align: center;
-  margin-top: 0.5rem;
-  padding: 0.5rem;
+  margin: 0.5rem 0;
+  padding: 1rem;
   border-radius: 5px;
+  width: 60%;
 }
 
 .scroll {
