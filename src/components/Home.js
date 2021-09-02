@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { weatherActions } from "../store/weather";
 import classes from "./Home.module.css";
 
+import SearchIcon from "@material-ui/icons/Search";
+
 import Weather from "./Weather";
 
 const Home = () => {
@@ -29,12 +31,12 @@ const Home = () => {
         </div>
         <div className={classes.inputContainer}>
           <div className={classes.inputSection}>
-            <i class="fas fa-search icon night-icon"></i>
+            <SearchIcon className={classes.icon} />
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                dispatch(weatherActions.getWeather(inputValue));
-                console.log(inputValue);
+
+                console.log(weather);
               }}
             >
               <input

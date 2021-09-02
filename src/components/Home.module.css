@@ -18,6 +18,10 @@
   position: relative;
 }
 
+.input-section {
+  position: relative;
+}
+
 .input {
   height: 2.5rem;
   border: 1px solid #ffffff;
@@ -38,8 +42,8 @@ input[type="search"]:focus {
 
 .icon {
   position: absolute;
-  left: 26.5vw;
-  top: 15px;
+  left: 21vw;
+  top: 23px;
 }
 
 .night-icon {

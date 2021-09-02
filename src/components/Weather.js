@@ -45,10 +45,6 @@ const Weather = () => {
         }
         res.json().then((jsonData) => {
           dispatch(weatherActions.getWeather(jsonData));
-          // get Hourly result from Web API
-          // getHourlyWeather(jsonData, metric);
-          //get weekly result from Web API
-          // getWeeklyWeather(jsonData, metric);
         });
       })
       .catch((err) => {
@@ -58,7 +54,7 @@ const Weather = () => {
 
   useEffect(() => {
     getCurrentWeather("Vancouver", "metric");
-  }, []);
+  }, [dispatch]);
 
   function localTime(t) {
     return new Date().toLocaleString("en-US", {
