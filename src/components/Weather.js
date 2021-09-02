@@ -87,7 +87,7 @@ const Weather = () => {
   return (
     <>
       {weather && (
-        <div>
+        <div className={classes.contentWrapper}>
           <div>
             <div>
               <p>
@@ -127,27 +127,20 @@ const Weather = () => {
                   {weather.main && Math.round(weather.main.feels_like)}°
                 </p>
               </div>
-              <p class="displayDate"></p>
             </div>
             <div>
               <h2 class="sub-title">Hourly Forecast - {weather.name}</h2>
             </div>
-            <div id="scroll">
-              <div
-                id="container-for-hourly-weather"
-                className={classes.hourlyContentDirection}
-              ></div>
+            <div className={classes.scroll}>
+              <HourlyWeather />
             </div>
             <div>
-              <p id="weeklyTitle"></p>
+              <h2 class="sub-title">Weekly Forecast - {weather.name}</h2>
             </div>
-            <div
-              id="container-for-weekly-weather"
-              className={classes.weeklyContentDirection}
-            ></div>
+            <div className={classes.scroll}>
+              <WeeklyWeather />
+            </div>
           </div>
-          <WeeklyWeather />
-          <HourlyWeather />
           <div className={(classes.modalContainer, classes.hidden)}>
             <i class="fas fa-times closeBtn"></i>
             <div class="modal"></div>

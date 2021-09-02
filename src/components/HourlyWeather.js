@@ -64,33 +64,29 @@ const HourlyWeather = () => {
 
   return (
     <>
-      <h1>hourly weather</h1>
-      {hourlyWeather.hourly && (
-        <div className={classes.scroll}>
-          {allTime.map((item, i) => {
-            const iconCodes =
-              hourlyWeather.hourly && hourlyWeather.hourly[i].weather[0].icon;
-            return (
-              <div className={classes.content}>
-                <p>{Math.round(hourlyWeather.hourly[i].temp)}°</p>
-                <img
-                  src={"http://openweathermap.org/img/w/" + iconCodes + ".png"}
-                  class="weather-icons"
-                />
-                {item <= 11 ? (
-                  <p>{item} am</p>
-                ) : item === 12 ? (
-                  <p>{item} pm</p>
-                ) : item >= 13 && item <= 23 ? (
-                  <p>{item - 12} pm</p>
-                ) : (
-                  <p>12 am</p>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      )}
+      {hourlyWeather.hourly &&
+        allTime.map((item, i) => {
+          const iconCodes =
+            hourlyWeather.hourly && hourlyWeather.hourly[i].weather[0].icon;
+          return (
+            <div className={classes.content}>
+              <p>{Math.round(hourlyWeather.hourly[i].temp)}°</p>
+              <img
+                src={"http://openweathermap.org/img/w/" + iconCodes + ".png"}
+                class="weather-icons"
+              />
+              {item <= 11 ? (
+                <p>{item} am</p>
+              ) : item === 12 ? (
+                <p>{item} pm</p>
+              ) : item >= 13 && item <= 23 ? (
+                <p>{item - 12} pm</p>
+              ) : (
+                <p>12 am</p>
+              )}
+            </div>
+          );
+        })}
     </>
   );
 };

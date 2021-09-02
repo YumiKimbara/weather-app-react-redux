@@ -18,7 +18,9 @@ const WeeklyWeather = () => {
   const getWeeklyWeather = (data, units) => {
     weather &&
       fetch(
-        `${api.base}onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&units=${units}&exclude=curret,minutely,hourly,alerts&appid=${api.key}`
+        `${api.base}onecall?lat=${data.coord && data.coord.lat}&lon=${
+          data.coord && data.coord.lon
+        }&units=${units}&exclude=curret,minutely,hourly,alerts&appid=${api.key}`
       )
         .then((res) => {
           if (!res.ok) {
@@ -41,8 +43,8 @@ const WeeklyWeather = () => {
 
   // const weekResult = () => {
 
-  //   function localDate2(d) {
-  //     let tomorrow = new Date();
+  //   const localDate2 = (d) => {
+  //     const tomorrow = new Date();
   //     tomorrow.setDate(tomorrow.getDate() + i);
   //     return tomorrow.toLocaleDateString("en-US", {
   //       weekday: "short",
@@ -54,11 +56,17 @@ const WeeklyWeather = () => {
 
   return (
     <>
-      <div>
-        <h2 class="sub-title">Weekly Forecast - {weather.name}</h2>
-      </div>
       {weeklyWeather.daily &&
         weeklyWeather.daily.map((item, i) => {
+          const localDate2 = (d) => {
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + i);
+            return tomorrow.toLocaleDateString("en-US", {
+              weekday: "short",
+              timeZone: d.timezone,
+            });
+          };
+
           let iconCode = weeklyWeather.daily[i].weather[0].icon;
 
           return (
@@ -70,7 +78,7 @@ const WeeklyWeather = () => {
                   src={"http://openweathermap.org/img/w/" + iconCode + ".png"}
                   class="weather-icons"
                 />
-                {console.log("<p>{localDate2(weeklyWeather)}</p>")}
+                <p>{localDate2(weeklyWeather)}</p>
               </div>
             </div>
           );
