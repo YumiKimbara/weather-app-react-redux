@@ -30,11 +30,8 @@ const HourlyWeather = () => {
           alert("Something went wrong!");
         }
         res.json().then((dataHour) => {
-          //render hourly content
           dispatch(weatherActions.getHourlyWeather(dataHour));
-          // renderHourlyContent(dataHour);
           //changeBackground(dataHour);
-          //render local time and Date
         });
       })
       .catch((err) => {
@@ -45,45 +42,6 @@ const HourlyWeather = () => {
   useEffect(() => {
     getHourlyWeather(weather, "metric");
   }, [weather]);
-
-  // const renderHourlyContent = () => {
-  //   let result = [];
-  //   for (let i = 0; i < hourlyWeather.hourly.length - 24; i++) {
-  //     //get every hour
-  //     function localTime2(t) {
-  //       let nextHour = new Date();
-  //       nextHour.setHours(nextHour.getHours() + i);
-  //       return nextHour.toLocaleString("en-US", {
-  //         timeZone: t.timezone,
-  //         timeStyle: "short",
-  //         hourCycle: "h24",
-  //       });
-  //     }
-  //     let hourResult = +localTime2(hourlyWeather).slice(0, 2);
-
-  //     let iconCode =
-  //       hourlyWeather.hourly && hourlyWeather.hourly[i].weather[0].icon;
-  //     const iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
-
-  //     //   `<div>
-  //     //   <div class="content">
-  //     //     <p>{Math.round(hourlyWeather.hourly[i].temp)}°</p>
-  //     //     <img src={iconUrl} class="weather-icons" />
-  //     //     <p>
-  //     //       {hourResult <= 11
-  //     //         ? hourResult + "am"
-  //     //         : hourResult === 12
-  //     //         ? hourResult + "pm"
-  //     //         : hourResult >= 13 && hourResult <= 23
-  //     //         ? hourResult - 12 + "pm"
-  //     //         : (hourResult = 12 + "am")}
-  //     //     </p>
-  //     //   </div>
-  //     // </div>`;
-
-  //     return console.log(hourlyWeather.hourly);
-  //   }
-  // };
 
   const hourResult =
     hourlyWeather.hourly &&
@@ -100,41 +58,9 @@ const HourlyWeather = () => {
       }
       let hourTime = +localTime2(hourlyWeather).slice(0, 2);
       return hourTime;
-
-      // console.log(hourResult);
-
-      // let iconCode =
-      //   hourlyWeather.hourly && hourlyWeather.hourly[i].weather[0].icon;
-      // const iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
-
-      // return (
-      //   <div>
-      //     <div class="content">
-      //       <p>{Math.round(hourlyWeather.hourly[i].temp)}°</p>
-      //       <img src={iconUrl} class="weather-icons" />
-      //       <p>
-      //         {hourResult <= 11
-      //           ? hourResult + "am"
-      //           : hourResult === 12
-      //           ? hourResult + "pm"
-      //           : hourResult >= 13 && hourResult <= 23
-      //           ? hourResult - 12 + "pm"
-      //           : (hourResult = 12 + "am")}
-      //       </p>
-      //     </div>
-      //   </div>
-      // );
     });
 
   const allTime = hourResult && hourResult.slice(0, 24);
-
-  let iconUrl =
-    allTime &&
-    allTime.map((item, i) => {
-      const iconCodes =
-        hourlyWeather.hourly && hourlyWeather.hourly[i].weather[0].icon;
-      return "http://openweathermap.org/img/w/" + iconCodes + ".png";
-    });
 
   return (
     <>
@@ -142,9 +68,7 @@ const HourlyWeather = () => {
       {hourlyWeather.hourly && (
         <div className={classes.scroll}>
           {allTime.map((item, i) => {
-            {
-              console.log(item);
-            }
+            console.log(item);
             const iconCodes =
               hourlyWeather.hourly && hourlyWeather.hourly[i].weather[0].icon;
             return (
@@ -156,9 +80,9 @@ const HourlyWeather = () => {
                 />
                 {item <= 11 ? (
                   <p>{item} am</p>
-                ) : { item } === 12 ? (
+                ) : item === 12 ? (
                   <p>{item} pm</p>
-                ) : { item } >= 13 && { item } <= 23 ? (
+                ) : item >= 13 && item <= 23 ? (
                   <p>{item - 12} pm</p>
                 ) : (
                   <p>12 am</p>
