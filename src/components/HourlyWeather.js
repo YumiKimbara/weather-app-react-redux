@@ -68,7 +68,6 @@ const HourlyWeather = () => {
       {hourlyWeather.hourly && (
         <div className={classes.scroll}>
           {allTime.map((item, i) => {
-            console.log(item);
             const iconCodes =
               hourlyWeather.hourly && hourlyWeather.hourly[i].weather[0].icon;
             return (

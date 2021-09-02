@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialWeatherState = { fetchedData: [], fetchedHoulyData: [] };
+const initialWeatherState = {
+  fetchedData: [],
+  fetchedHoulyData: [],
+  fetchedWeeklyData: [],
+};
 
 const weatherSlice = createSlice({
   name: "weather",
@@ -11,6 +15,10 @@ const weatherSlice = createSlice({
     },
     getHourlyWeather(state, action) {
       state.fetchedHoulyData = action.payload;
+    },
+
+    getWeeklyWeather(state, action) {
+      state.fetchedWeeklyData = action.payload;
     },
   },
 });
