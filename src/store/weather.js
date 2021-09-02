@@ -4,6 +4,7 @@ const initialWeatherState = {
   fetchedData: [],
   fetchedHoulyData: [],
   fetchedWeeklyData: [],
+  city: "Vancouver",
 };
 
 const weatherSlice = createSlice({
@@ -19,6 +20,9 @@ const weatherSlice = createSlice({
 
     getWeeklyWeather(state, action) {
       state.fetchedWeeklyData = action.payload;
+    },
+    getCity(state, action) {
+      state.city = action.payload;
     },
   },
 });

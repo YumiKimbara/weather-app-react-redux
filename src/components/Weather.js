@@ -10,7 +10,7 @@ import classes from "./Weather.module.css";
 const Weather = () => {
   const weather = useSelector((state) => state.weather.fetchedData);
   const hourlyWeather = useSelector((state) => state.weather.fetchedHoulyData);
-  console.log(weather);
+  const city = useSelector((state) => state.weather.city);
 
   const dispatch = useDispatch();
 
@@ -54,7 +54,11 @@ const Weather = () => {
 
   useEffect(() => {
     getCurrentWeather("Vancouver", "metric");
-  }, [dispatch]);
+  }, []);
+
+  useEffect(() => {
+    getCurrentWeather(city, "metric");
+  }, [city]);
 
   function localTime(t) {
     return new Date().toLocaleString("en-US", {

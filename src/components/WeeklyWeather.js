@@ -41,8 +41,6 @@ const WeeklyWeather = () => {
     getWeeklyWeather(weather, "metric");
   }, [weather]);
 
-  console.log(weeklyWeather);
-
   // const weekResult = () => {
 
   //   const localDate2 = (d) => {

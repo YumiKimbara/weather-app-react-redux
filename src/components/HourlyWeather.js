@@ -8,8 +8,6 @@ const HourlyWeather = () => {
   const weather = useSelector((state) => state.weather.fetchedData);
   const hourlyWeather = useSelector((state) => state.weather.fetchedHoulyData);
 
-  console.log(hourlyWeather);
-
   const dispatch = useDispatch();
 
   const api = {

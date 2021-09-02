@@ -10,7 +10,6 @@ import Weather from "./Weather";
 const Home = () => {
   const [inputValue, setInputValue] = useState("");
   const dispatch = useDispatch();
-  const weather = useSelector((state) => state.weather.fetchedData);
 
   const sunnyBg = "/bg-video/sunny.mp4";
 
@@ -33,10 +32,14 @@ const Home = () => {
           <div className={classes.inputSection}>
             <SearchIcon className={classes.icon} />
             <form
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  dispatch(weatherActions.getCity(inputValue));
+                  e.target.value = "";
+                }
+              }}
               onSubmit={(e) => {
                 e.preventDefault();
-
-                console.log(weather);
               }}
             >
               <input
