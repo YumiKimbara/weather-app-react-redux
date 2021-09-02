@@ -41,23 +41,10 @@ const WeeklyWeather = () => {
     getWeeklyWeather(weather, "metric");
   }, [weather]);
 
-  // const weekResult = () => {
-
-  //   const localDate2 = (d) => {
-  //     const tomorrow = new Date();
-  //     tomorrow.setDate(tomorrow.getDate() + i);
-  //     return tomorrow.toLocaleDateString("en-US", {
-  //       weekday: "short",
-  //       timeZone: d.timezone,
-  //     });
-  //   }
-  //   localDate2(weeklyWeather);
-  // };
-
   return (
     <>
       {weeklyWeather.daily &&
-        weeklyWeather.daily.map((item, i) => {
+        weeklyWeather.daily.map((_, i) => {
           const localDate2 = (d) => {
             const tomorrow = new Date();
             tomorrow.setDate(tomorrow.getDate() + i);

@@ -8,12 +8,6 @@
   z-index: -1;
 }
 
-.bgVideoContent {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-}
-
 .inputContainer {
   position: relative;
 }

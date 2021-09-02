@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { weatherActions } from "../store/weather";
 import classes from "./Home.module.css";
@@ -6,27 +6,18 @@ import classes from "./Home.module.css";
 import SearchIcon from "@material-ui/icons/Search";
 
 import Weather from "./Weather";
+import Clip from "./Clip";
 
 const Home = () => {
   const [inputValue, setInputValue] = useState("");
   const dispatch = useDispatch();
-
-  const sunnyBg = "/bg-video/sunny.mp4";
+  const video = useSelector((state) => state.weather.video);
 
   return (
     <>
       <div class="night-mode">
         <div className={classes.bgVideo}>
-          <video
-            // id="video-change"
-            className={classes.bgVideoContent}
-            autoPlay
-            muted
-            loop
-          >
-            <source src={sunnyBg} type="video/mp4" />
-            Your browser is not supported!
-          </video>
+          <Clip />
         </div>
         <div className={classes.inputContainer}>
           <div className={classes.inputSection}>

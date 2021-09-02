@@ -17,7 +17,109 @@ const HourlyWeather = () => {
     base: "http://api.openweathermap.org/data/2.5/",
   };
 
-  let time = "";
+  function localTime(t) {
+    return new Date().toLocaleString("en-US", {
+      timeZone: t.timezone,
+      timeStyle: "short",
+      hourCycle: "h24",
+    });
+  }
+
+  const changeBackground = (dataHour) => {
+    // const videoChange = document.getElementById("video-change");
+    const weatherCondition = dataHour.current.weather[0].main;
+    console.log(weatherCondition);
+    const currentTime = +localTime(dataHour).slice(0, 2);
+    console.log(currentTime);
+
+    if (
+      (weatherCondition === "Clouds" ||
+        weatherCondition === "Smoke" ||
+        weatherCondition === "Haze" ||
+        weatherCondition === "Dust" ||
+        weatherCondition === "Fog" ||
+        weatherCondition === "Sand" ||
+        weatherCondition === "Ash") &&
+      currentTime >= 4 &&
+      currentTime <= 20
+    ) {
+      dispatch(weatherActions.changeVideo("bg-video/cloudy.mp4"));
+      //changeToDayMode();
+    }
+    if (
+      (weatherCondition === "Clouds" ||
+        weatherCondition === "Smoke" ||
+        weatherCondition === "Haze" ||
+        weatherCondition === "Dust" ||
+        weatherCondition === "Fog" ||
+        weatherCondition === "Sand" ||
+        weatherCondition === "Ash") &&
+      ((currentTime >= 21 && currentTime <= 24) ||
+        (currentTime >= 1 && currentTime <= 3))
+    ) {
+      dispatch(weatherActions.changeVideo("bg-video/cloudy_night.mp4"));
+
+      //changeToNightMode();
+    }
+    if (weatherCondition === "Clear" && currentTime >= 4 && currentTime <= 20) {
+      dispatch(weatherActions.changeVideo("bg-video/sunny.mp4"));
+
+      //changeToDayMode();
+    }
+    if (
+      weatherCondition === "Clear" &&
+      ((currentTime >= 21 && currentTime <= 24) ||
+        (currentTime >= 1 && currentTime <= 3))
+    ) {
+      dispatch(weatherActions.changeVideo("bg-video/sunny_night.mp4"));
+
+      //changeToNightMode();
+    }
+    if (
+      (weatherCondition === "Rain" ||
+        weatherCondition === "Thunderstorm" ||
+        weatherCondition === "Drizzle" ||
+        weatherCondition === "Mist" ||
+        weatherCondition === "Squall" ||
+        weatherCondition === "Tornado") &&
+      currentTime >= 4 &&
+      currentTime <= 20
+    ) {
+      dispatch(weatherActions.changeVideo("bg-video/rainy.mp4"));
+
+      //changeToDayMode();
+    }
+    if (
+      (weatherCondition === "Rain" ||
+        weatherCondition === "Thunderstorm" ||
+        weatherCondition === "Drizzle" ||
+        weatherCondition === "Mist" ||
+        weatherCondition === "Squall" ||
+        weatherCondition === "Tornado") &&
+      ((currentTime >= 21 && currentTime <= 24) ||
+        (currentTime >= 1 && currentTime <= 3))
+    ) {
+      dispatch(weatherActions.changeVideo("bg-video/rainy_night.mp4"));
+
+      //changeToNightMode();
+    }
+
+    if (weatherCondition === "Snow" && currentTime >= 4 && currentTime <= 20) {
+      dispatch(weatherActions.changeVideo("bg-video/snow.mp4"));
+
+      //changeToNightMode();
+    }
+    if (
+      weatherCondition === "Snow" &&
+      ((currentTime >= 21 && currentTime <= 24) ||
+        (currentTime >= 1 && currentTime <= 3))
+    ) {
+      dispatch(weatherActions.changeVideo("bg-video/snow_night.mp4"));
+
+      //changeToNightMode();
+    }
+  };
+
   function getHourlyWeather(data, units) {
     fetch(
       data.coord &&
@@ -29,7 +131,7 @@ const HourlyWeather = () => {
         }
         res.json().then((dataHour) => {
           dispatch(weatherActions.getHourlyWeather(dataHour));
-          //changeBackground(dataHour);
+          changeBackground(dataHour);
         });
       })
       .catch((err) => {
