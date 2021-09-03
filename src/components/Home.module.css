@@ -48,3 +48,15 @@ input[type="search"]:focus {
   margin-top: 1rem;
   margin-left: 1rem;
 }
+
+.nightMode {
+  color: white;
+}
+
+.nightMode a {
+  color: white;
+}
+
+.dayMode {
+  color: #484848;
+}

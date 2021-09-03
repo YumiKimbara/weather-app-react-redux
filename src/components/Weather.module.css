@@ -80,7 +80,15 @@
   width: 60%;
 }
 
-.scroll {
+.nightMode {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  overflow: scroll;
+}
+
+.dayMode {
+  color: #484848;
   display: flex;
   justify-content: space-between;
   overflow: scroll;

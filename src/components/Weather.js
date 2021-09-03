@@ -10,6 +10,7 @@ import classes from "./Weather.module.css";
 const Weather = () => {
   const weather = useSelector((state) => state.weather.fetchedData);
   const hourlyWeather = useSelector((state) => state.weather.fetchedHoulyData);
+  const video = useSelector((state) => state.weather.video);
   const city = useSelector((state) => state.weather.city);
 
   const dispatch = useDispatch();
@@ -90,7 +91,11 @@ const Weather = () => {
         <div className={classes.contentWrapper}>
           <div>
             <div>
-              <p>
+              <p
+                className={
+                  video.includes("night") ? classes.nightMode : classes.dayMode
+                }
+              >
                 Local time:
                 {time <= 9
                   ? time.slice(1, 2) + ":" + time3 + "am"
@@ -133,15 +138,37 @@ const Weather = () => {
               </div>
             </div>
             <div>
-              <h3 class={classes.subTitle}>Hourly Forecast - {weather.name}</h3>
+              <h3
+                class={
+                  (classes.subTitle,
+                  video.includes("night") ? classes.nightMode : classes.dayMode)
+                }
+              >
+                Hourly Forecast - {weather.name}
+              </h3>
             </div>
-            <div className={classes.scroll}>
+            <div
+              className={
+                video.includes("night") ? classes.nightMode : classes.dayMode
+              }
+            >
               <HourlyWeather />
             </div>
             <div>
-              <h3 class={classes.subTitle}>Weekly Forecast - {weather.name}</h3>
+              <h3
+                class={
+                  video.includes("night") ? classes.nightMode : classes.dayMode
+                }
+              >
+                Weekly Forecast - {weather.name}
+              </h3>
             </div>
-            <div className={classes.scroll}>
+            <div
+              className={
+                (classes.scroll,
+                video.includes("night") ? classes.nightMode : classes.dayMode)
+              }
+            >
               <WeeklyWeather />
             </div>
           </div>

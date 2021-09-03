@@ -50,7 +50,12 @@ const Home = () => {
       <Weather />
 
       <div>
-        <p className={classes.attribute}>
+        <p
+          className={
+            (classes.attribute,
+            video.includes("night") ? classes.nightMode : classes.dayMode)
+          }
+        >
           Icons made by
           <a href="https://www.freepik.com" title="Freepik">
             Freepik
