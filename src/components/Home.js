@@ -4,6 +4,7 @@ import { weatherActions } from "../store/weather";
 import classes from "./Home.module.css";
 
 import SearchIcon from "@material-ui/icons/Search";
+import CloseIcon from "@material-ui/icons/Close";
 
 import Weather from "./Weather";
 import Clip from "./Clip";
@@ -12,6 +13,8 @@ const Home = () => {
   const [inputValue, setInputValue] = useState("");
   const dispatch = useDispatch();
   const video = useSelector((state) => state.weather.video);
+
+  console.log(inputValue);
 
   return (
     <>
@@ -22,11 +25,19 @@ const Home = () => {
         <div className={classes.inputContainer}>
           <div className={classes.inputSection}>
             <SearchIcon className={classes.icon} />
+            {inputValue && (
+              <CloseIcon
+                className={classes.closeBtn}
+                onClick={(e) => {
+                  setInputValue("");
+                }}
+              />
+            )}
             <form
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   dispatch(weatherActions.getCity(inputValue));
-                  e.target.value = "";
+                  setInputValue((e.target.value = ""));
                 }
               }}
               onSubmit={(e) => {
@@ -35,9 +46,10 @@ const Home = () => {
             >
               <input
                 className={
-                  (classes.elementCenter, classes.useIcon, classes.input)
+                  (classes.elementCenter, classes.closeIcon, classes.input)
                 }
                 type="search"
+                value={inputValue}
                 placeholder="Search by the city name"
                 onChange={(e) => {
                   setInputValue(e.target.value);

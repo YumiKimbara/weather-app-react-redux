@@ -34,6 +34,17 @@ input[type="search"]:focus {
   text-align: center;
 }
 
+::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+.closeBtn {
+  position: absolute;
+  right: 21vw;
+  top: 23px;
+  cursor: pointer;
+}
+
 .icon {
   position: absolute;
   left: 21vw;

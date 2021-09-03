@@ -9,6 +9,7 @@ import classes from "./Weather.module.css";
 
 import { Modal } from "@material-ui/core";
 import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
+import CloseIcon from "@material-ui/icons/Close";
 
 const Weather = () => {
   const weather = useSelector((state) => state.weather.fetchedData);
@@ -99,6 +100,9 @@ const Weather = () => {
       {showModal && (
         <Modal open={showModal} onClose={handleClose}>
           <div className={classes.modalContainer}>
+            <div className={classes.closeBtn} onClick={handleClose}>
+              <CloseIcon />
+            </div>
             <p>Invalid city name. Please search again</p>
             <SentimentVeryDissatisfiedIcon />
           </div>
