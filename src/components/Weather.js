@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { weatherActions } from "../store/weather";
 
@@ -7,11 +7,15 @@ import HourlyWeather from "./HourlyWeather";
 
 import classes from "./Weather.module.css";
 
+import { Modal } from "@material-ui/core";
+import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
+
 const Weather = () => {
   const weather = useSelector((state) => state.weather.fetchedData);
   const hourlyWeather = useSelector((state) => state.weather.fetchedHoulyData);
   const video = useSelector((state) => state.weather.video);
   const city = useSelector((state) => state.weather.city);
+  const [showModal, setShowModal] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -28,6 +32,7 @@ const Weather = () => {
     )
       .then((res) => {
         if (res.status === 404) {
+          setShowModal(true);
           //   const modalContainer = document.querySelector(".modal-container");
           //   const modal = document.querySelector(".modal");
           //   const overlay = document.querySelector(".overlay");
@@ -85,8 +90,20 @@ const Weather = () => {
     });
   }
 
+  const handleClose = () => {
+    setShowModal(false);
+  };
+
   return (
     <>
+      {showModal && (
+        <Modal open={showModal} onClose={handleClose}>
+          <div className={classes.modalContainer}>
+            <p>Invalid city name. Please search again</p>
+            <SentimentVeryDissatisfiedIcon />
+          </div>
+        </Modal>
+      )}
       {weather && (
         <div className={classes.contentWrapper}>
           <div>
