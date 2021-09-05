@@ -5,13 +5,14 @@ import { weatherActions } from "../store/weather";
 
 import classes from "./WeeklyWeather.module.css";
 
-const WeeklyWeather = () => {
+const WeeklyWeather = ({ celsiusForWeeklyWeather }) => {
   const weather = useSelector((state) => state.weather.fetchedData);
   const weeklyWeather = useSelector((state) => state.weather.fetchedWeeklyData);
   const dispatch = useDispatch();
 
   const api = {
     // key: "f87193c8c1fceec76b7fc9727dfdd1da",
+    // key2: "b74f11c310e27f2b0b26642921ffe8ca",
     //Nashさんのkey↓
     key: "b2b86779f50b9bf6a8c0808905029f25",
     base: "http://api.openweathermap.org/data/2.5/",
@@ -38,7 +39,7 @@ const WeeklyWeather = () => {
   };
 
   useEffect(() => {
-    getWeeklyWeather(weather, "metric");
+    getWeeklyWeather(weather, celsiusForWeeklyWeather);
   }, [weather]);
 
   return (

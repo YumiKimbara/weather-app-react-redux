@@ -17,13 +17,18 @@ const Weather = () => {
   const video = useSelector((state) => state.weather.video);
   const city = useSelector((state) => state.weather.city);
   const [showModal, setShowModal] = useState(false);
+  const [celsiusForHourlyWeather, setCelsiusForHourlyWeather] =
+    useState("metric");
+  const [celsiusForWeeklyWeather, setCelsiusForWeeklyWeather] =
+    useState("metric");
 
   const dispatch = useDispatch();
 
   const api = {
-    key: "f87193c8c1fceec76b7fc9727dfdd1da",
+    // key: "f87193c8c1fceec76b7fc9727dfdd1da",
+    // key2: "b74f11c310e27f2b0b26642921ffe8ca",
     //Nashさんのkey↓
-    // key: "b2b86779f50b9bf6a8c0808905029f25",
+    key: "b2b86779f50b9bf6a8c0808905029f25",
     base: "http://api.openweathermap.org/data/2.5/",
   };
 
@@ -141,11 +146,27 @@ const Weather = () => {
                   <span id="renderCandF">°C</span>
                 </p>
                 <div>
-                  <button class={classes.tempButton} type="button">
+                  <button
+                    class={classes.tempButton}
+                    type="button"
+                    onClick={() => {
+                      getCurrentWeather("Vancouver", "metric");
+                      setCelsiusForHourlyWeather("metric");
+                      setCelsiusForWeeklyWeather("metric");
+                    }}
+                  >
                     °C
                   </button>
                   <span> / </span>
-                  <button class={classes.tempButton} type="button">
+                  <button
+                    class={classes.tempButton}
+                    type="button"
+                    onClick={() => {
+                      getCurrentWeather("Vancouver", "imperial");
+                      setCelsiusForHourlyWeather("imperial");
+                      setCelsiusForWeeklyWeather("imperial");
+                    }}
+                  >
                     °F
                   </button>
                 </div>
@@ -173,7 +194,9 @@ const Weather = () => {
                 video.includes("night") ? classes.nightMode : classes.dayMode
               }
             >
-              <HourlyWeather />
+              <HourlyWeather
+                celsiusForHourlyWeather={celsiusForHourlyWeather}
+              />
             </div>
             <div>
               <h3
@@ -190,7 +213,9 @@ const Weather = () => {
                 video.includes("night") ? classes.nightMode : classes.dayMode)
               }
             >
-              <WeeklyWeather />
+              <WeeklyWeather
+                celsiusForWeeklyWeather={celsiusForWeeklyWeather}
+              />
             </div>
           </div>
           <div className={(classes.modalContainer, classes.hidden)}>

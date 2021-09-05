@@ -4,14 +4,15 @@ import { weatherActions } from "../store/weather";
 
 import classes from "./HourlyWeather.module.css";
 
-const HourlyWeather = () => {
+const HourlyWeather = ({ celsiusForHourlyWeather }) => {
   const weather = useSelector((state) => state.weather.fetchedData);
   const hourlyWeather = useSelector((state) => state.weather.fetchedHoulyData);
 
   const dispatch = useDispatch();
 
   const api = {
-    // key: "f87193c8c1fceec76b7fc9727dfdd1da",
+    // key1: "f87193c8c1fceec76b7fc9727dfdd1da",
+    // key2: "b74f11c310e27f2b0b26642921ffe8ca",
     //Nashさんのkey↓
     key: "b2b86779f50b9bf6a8c0808905029f25",
     base: "http://api.openweathermap.org/data/2.5/",
@@ -140,7 +141,7 @@ const HourlyWeather = () => {
   }
 
   useEffect(() => {
-    getHourlyWeather(weather, "metric");
+    getHourlyWeather(weather, celsiusForHourlyWeather);
   }, [weather]);
 
   const hourResult =
