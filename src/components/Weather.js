@@ -21,6 +21,7 @@ const Weather = () => {
     useState("metric");
   const [celsiusForWeeklyWeather, setCelsiusForWeeklyWeather] =
     useState("metric");
+  const [temp, setTemp] = useState("°C");
 
   const dispatch = useDispatch();
 
@@ -143,7 +144,7 @@ const Weather = () => {
                 </span>
                 <p className={classes.currentTemp}>
                   {weather.main && Math.round(weather.main.temp)}
-                  <span id="renderCandF">°C</span>
+                  <span id="renderCandF">{temp}</span>
                 </p>
                 <div>
                   <button
@@ -153,6 +154,7 @@ const Weather = () => {
                       getCurrentWeather("Vancouver", "metric");
                       setCelsiusForHourlyWeather("metric");
                       setCelsiusForWeeklyWeather("metric");
+                      setTemp("°C");
                     }}
                   >
                     °C
@@ -165,6 +167,7 @@ const Weather = () => {
                       getCurrentWeather("Vancouver", "imperial");
                       setCelsiusForHourlyWeather("imperial");
                       setCelsiusForWeeklyWeather("imperial");
+                      setTemp("°F");
                     }}
                   >
                     °F
