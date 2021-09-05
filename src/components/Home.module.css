@@ -56,8 +56,9 @@ input[type="search"]:focus {
 }
 
 .attribute {
-  margin-top: 1rem;
-  margin-left: 1rem;
+  position: absolute;
+  bottom: 1rem;
+  padding-left: 2rem;
 }
 
 .nightMode {

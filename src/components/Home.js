@@ -61,11 +61,10 @@ const Home = () => {
       </div>
       <Weather />
 
-      <div>
+      <div className={classes.attribute}>
         <p
           className={
-            (classes.attribute,
-            video.includes("night") ? classes.nightMode : classes.dayMode)
+            video.includes("night") ? classes.nightMode : classes.dayMode
           }
         >
           Icons made by
