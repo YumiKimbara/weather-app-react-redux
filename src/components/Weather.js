@@ -25,6 +25,9 @@ const Weather = () => {
 
   const dispatch = useDispatch();
 
+  console.log("name", weather.name);
+  console.log("city", city);
+
   const api = {
     // key: "f87193c8c1fceec76b7fc9727dfdd1da",
     // key2: "b74f11c310e27f2b0b26642921ffe8ca",
@@ -41,9 +44,11 @@ const Weather = () => {
         if (res.status === 404) {
           setShowModal(true);
         }
-        res.json().then((jsonData) => {
-          dispatch(weatherActions.getWeather(jsonData));
-        });
+        if (res.status === 200) {
+          res.json().then((jsonData) => {
+            dispatch(weatherActions.getWeather(jsonData));
+          });
+        }
       })
       .catch((err) => {
         alert(`Something went wrong. ${err.message}`);
