@@ -7,7 +7,7 @@ import HourlyWeather from "./HourlyWeather";
 
 import classes from "./Weather.module.css";
 
-import { Modal } from "@material-ui/core";
+import { Modal, Switch } from "@material-ui/core";
 import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
 import CloseIcon from "@material-ui/icons/Close";
 
@@ -17,12 +17,17 @@ const Weather = () => {
   const video = useSelector((state) => state.weather.video);
   const city = useSelector((state) => state.weather.city);
   const [showModal, setShowModal] = useState(false);
+  const [celsiusForCurrentWeather, setCelsiusForCurrentWeather] =
+    useState("metric");
   const [celsiusForHourlyWeather, setCelsiusForHourlyWeather] =
     useState("metric");
   const [celsiusForWeeklyWeather, setCelsiusForWeeklyWeather] =
     useState("metric");
   const [temp, setTemp] = useState("°C");
-
+  const [toggle, setToggle] = useState({
+    checkedA: true,
+    checkedB: true,
+  });
   const dispatch = useDispatch();
 
   const api = {
@@ -33,9 +38,9 @@ const Weather = () => {
     base: "https://api.openweathermap.org/data/2.5/",
   };
 
-  function getCurrentWeather(query, metric) {
+  function getCurrentWeather(query, units) {
     fetch(
-      `${api.base}weather?q=${query}&units=${metric}&id=524901&appid=${api.key}`
+      `${api.base}weather?q=${query}&units=${units}&id=524901&appid=${api.key}`
     )
       .then((res) => {
         if (res.status === 404) {
@@ -57,7 +62,8 @@ const Weather = () => {
   }, []);
 
   useEffect(() => {
-    getCurrentWeather(city, "metric");
+    //@@@
+    getCurrentWeather(city, celsiusForCurrentWeather);
   }, [city]);
 
   function localTime(t) {
@@ -88,6 +94,23 @@ const Weather = () => {
 
   const modalCloseHandler = () => {
     setShowModal(false);
+  };
+
+  const tempToggleHandler = (e) => {
+    setToggle({ ...toggle, [e.target.name]: e.target.checked });
+    if (toggle.checkedA) {
+      setCelsiusForCurrentWeather("metric");
+      getCurrentWeather(city, celsiusForCurrentWeather);
+      setCelsiusForHourlyWeather("imperial");
+      setCelsiusForWeeklyWeather("imperial");
+      setTemp("°F");
+    } else {
+      setCelsiusForCurrentWeather("imperial");
+      getCurrentWeather(city, celsiusForCurrentWeather);
+      setCelsiusForHourlyWeather("metric");
+      setCelsiusForWeeklyWeather("metric");
+      setTemp("°C");
+    }
   };
 
   return (
@@ -133,34 +156,15 @@ const Weather = () => {
                 </span>
                 <p className={classes.currentTemp}>
                   {weather.main && Math.round(weather.main.temp)}
-                  <span id="renderCandF">{temp}</span>
+                  <span>{temp}</span>
                 </p>
                 <div>
-                  <button
-                    class={classes.tempButton}
-                    type="button"
-                    onClick={() => {
-                      getCurrentWeather(city, "metric");
-                      setCelsiusForHourlyWeather("metric");
-                      setCelsiusForWeeklyWeather("metric");
-                      setTemp("°C");
-                    }}
-                  >
-                    °C
-                  </button>
-                  <span> / </span>
-                  <button
-                    class={classes.tempButton}
-                    type="button"
-                    onClick={() => {
-                      getCurrentWeather(city, "imperial");
-                      setCelsiusForHourlyWeather("imperial");
-                      setCelsiusForWeeklyWeather("imperial");
-                      setTemp("°F");
-                    }}
-                  >
-                    °F
-                  </button>
+                  <Switch
+                    checked={toggle.checkedA}
+                    onChange={tempToggleHandler}
+                    name="checkedA"
+                    inputProps={{ "aria-label": "blue checkbox" }}
+                  />
                 </div>
                 <div>
                   <p>{weather.weather && weather.weather[0].main}</p>
@@ -196,7 +200,7 @@ const Weather = () => {
             <div>
               <div className={classes.subTitle}>
                 <h3
-                  class={
+                  className={
                     video.includes("night")
                       ? classes.nightMode
                       : classes.dayMode

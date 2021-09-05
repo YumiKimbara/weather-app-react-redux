@@ -62,13 +62,6 @@
   font-size: 28px;
 }
 
-.tempButton {
-  border: none;
-  background-color: transparent;
-  color: #484848;
-  cursor: pointer;
-}
-
 .subTitle {
   margin-top: 2rem;
 }
