@@ -15,7 +15,7 @@ const HourlyWeather = ({ celsiusForHourlyWeather }) => {
     // key2: "b74f11c310e27f2b0b26642921ffe8ca",
     //Nashさんのkey↓
     key: "b2b86779f50b9bf6a8c0808905029f25",
-    base: "http://api.openweathermap.org/data/2.5/",
+    base: "https://api.openweathermap.org/data/2.5/",
   };
 
   function localTime(t) {
@@ -173,7 +173,7 @@ const HourlyWeather = ({ celsiusForHourlyWeather }) => {
             <div className={classes.content}>
               <p>{Math.round(hourlyWeather.hourly[i].temp)}°</p>
               <img
-                src={"http://openweathermap.org/img/w/" + iconCodes + ".png"}
+                src={"https://openweathermap.org/img/w/" + iconCodes + ".png"}
                 class="weather-icons"
               />
               {item <= 11 ? (

@@ -15,7 +15,7 @@ const WeeklyWeather = ({ celsiusForWeeklyWeather }) => {
     // key2: "b74f11c310e27f2b0b26642921ffe8ca",
     //Nashさんのkey↓
     key: "b2b86779f50b9bf6a8c0808905029f25",
-    base: "http://api.openweathermap.org/data/2.5/",
+    base: "https://api.openweathermap.org/data/2.5/",
   };
 
   const getWeeklyWeather = (data, units) => {
@@ -63,7 +63,7 @@ const WeeklyWeather = ({ celsiusForWeeklyWeather }) => {
                 <p>Max: {Math.round(weeklyWeather.daily[i].temp.max)}°</p>
                 <p>Min: {Math.round(weeklyWeather.daily[i].temp.min)}°</p>
                 <img
-                  src={"http://openweathermap.org/img/w/" + iconCode + ".png"}
+                  src={"//openweathermap.org/img/w/" + iconCode + ".png"}
                   class="weather-icons"
                 />
                 <p>{localDate2(weeklyWeather)}</p>
