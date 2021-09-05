@@ -12,11 +12,12 @@
   position: relative;
 }
 
-.input-section {
+.inputSection {
   position: relative;
+  text-align: center;
 }
 
-.input {
+input {
   height: 2.5rem;
   border: 1px solid #ffffff;
   padding-left: 3rem;
@@ -27,11 +28,6 @@
 
 input[type="search"]:focus {
   outline: 0;
-}
-
-.inputSection {
-  position: relative;
-  text-align: center;
 }
 
 ::-webkit-search-cancel-button {
@@ -49,10 +45,6 @@ input[type="search"]:focus {
   position: absolute;
   left: 21vw;
   top: 23px;
-}
-
-.night-icon {
-  color: #484848;
 }
 
 .attribute {

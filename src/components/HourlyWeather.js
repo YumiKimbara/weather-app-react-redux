@@ -18,7 +18,7 @@ const HourlyWeather = ({ celsiusForHourlyWeather }) => {
     base: "https://api.openweathermap.org/data/2.5/",
   };
 
-  function localTime(t) {
+  function localTimeForCurrentTime(t) {
     return new Date().toLocaleString("en-US", {
       timeZone: t.timezone,
       timeStyle: "short",
@@ -27,11 +27,8 @@ const HourlyWeather = ({ celsiusForHourlyWeather }) => {
   }
 
   const changeBackground = (dataHour) => {
-    // const videoChange = document.getElementById("video-change");
     const weatherCondition = dataHour.current.weather[0].main;
-    console.log(weatherCondition);
-    const currentTime = +localTime(dataHour).slice(0, 2);
-    console.log(currentTime);
+    const currentTime = +localTimeForCurrentTime(dataHour).slice(0, 2);
 
     if (
       (weatherCondition === "Clouds" ||
@@ -45,7 +42,6 @@ const HourlyWeather = ({ celsiusForHourlyWeather }) => {
       currentTime <= 20
     ) {
       dispatch(weatherActions.changeVideo("bg-video/cloudy.mp4"));
-      //changeToDayMode();
     }
     if (
       (weatherCondition === "Clouds" ||
@@ -59,13 +55,9 @@ const HourlyWeather = ({ celsiusForHourlyWeather }) => {
         (currentTime >= 1 && currentTime <= 3))
     ) {
       dispatch(weatherActions.changeVideo("bg-video/cloudy_night.mp4"));
-
-      //changeToNightMode();
     }
     if (weatherCondition === "Clear" && currentTime >= 4 && currentTime <= 20) {
       dispatch(weatherActions.changeVideo("bg-video/sunny.mp4"));
-
-      //changeToDayMode();
     }
     if (
       weatherCondition === "Clear" &&
@@ -73,8 +65,6 @@ const HourlyWeather = ({ celsiusForHourlyWeather }) => {
         (currentTime >= 1 && currentTime <= 3))
     ) {
       dispatch(weatherActions.changeVideo("bg-video/sunny_night.mp4"));
-
-      //changeToNightMode();
     }
     if (
       (weatherCondition === "Rain" ||
@@ -87,8 +77,6 @@ const HourlyWeather = ({ celsiusForHourlyWeather }) => {
       currentTime <= 20
     ) {
       dispatch(weatherActions.changeVideo("bg-video/rainy.mp4"));
-
-      //changeToDayMode();
     }
     if (
       (weatherCondition === "Rain" ||
@@ -101,14 +89,10 @@ const HourlyWeather = ({ celsiusForHourlyWeather }) => {
         (currentTime >= 1 && currentTime <= 3))
     ) {
       dispatch(weatherActions.changeVideo("bg-video/rainy_night.mp4"));
-
-      //changeToNightMode();
     }
 
     if (weatherCondition === "Snow" && currentTime >= 4 && currentTime <= 20) {
       dispatch(weatherActions.changeVideo("bg-video/snow.mp4"));
-
-      //changeToNightMode();
     }
     if (
       weatherCondition === "Snow" &&
@@ -116,8 +100,6 @@ const HourlyWeather = ({ celsiusForHourlyWeather }) => {
         (currentTime >= 1 && currentTime <= 3))
     ) {
       dispatch(weatherActions.changeVideo("bg-video/snow_night.mp4"));
-
-      //changeToNightMode();
     }
   };
 
@@ -128,7 +110,7 @@ const HourlyWeather = ({ celsiusForHourlyWeather }) => {
     )
       .then((res) => {
         if (!res.ok) {
-          alert("Something went wrong!!");
+          alert("Something went wrong.");
         }
         res.json().then((dataHour) => {
           dispatch(weatherActions.getHourlyWeather(dataHour));
@@ -146,9 +128,9 @@ const HourlyWeather = ({ celsiusForHourlyWeather }) => {
 
   const hourResult =
     hourlyWeather.hourly &&
-    hourlyWeather.hourly.map((item, i) => {
+    hourlyWeather.hourly.map((_, i) => {
       //get every hour
-      function localTime2(t) {
+      function localTimeForHourlyTime(t) {
         let nextHour = new Date();
         nextHour.setHours(nextHour.getHours() + i);
         return nextHour.toLocaleString("en-US", {
@@ -157,7 +139,7 @@ const HourlyWeather = ({ celsiusForHourlyWeather }) => {
           hourCycle: "h24",
         });
       }
-      let hourTime = +localTime2(hourlyWeather).slice(0, 2);
+      let hourTime = +localTimeForHourlyTime(hourlyWeather).slice(0, 2);
       return hourTime;
     });
 
@@ -170,7 +152,7 @@ const HourlyWeather = ({ celsiusForHourlyWeather }) => {
           const iconCodes =
             hourlyWeather.hourly && hourlyWeather.hourly[i].weather[0].icon;
           return (
-            <div className={classes.content}>
+            <div className={classes.hourlyContent}>
               <p>{Math.round(hourlyWeather.hourly[i].temp)}°</p>
               <img
                 src={"https://openweathermap.org/img/w/" + iconCodes + ".png"}

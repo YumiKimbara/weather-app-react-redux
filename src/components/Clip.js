@@ -8,15 +8,20 @@ const Clip = () => {
   const videoRef = useRef();
   const previousUrl = useRef(video);
 
+  console.log("ref", videoRef, previousUrl);
+
   useEffect(() => {
+    // ignore if the previous url is same as video url
     if (previousUrl.current === video) {
       return;
     }
 
+    // load a video
     if (videoRef.current) {
       videoRef.current.load();
     }
 
+    // set previous url to current video url
     previousUrl.current = video;
   }, [video]);
 

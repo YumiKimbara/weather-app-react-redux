@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { weatherActions } from "../store/weather";
+
 import classes from "./Home.module.css";
 
 import SearchIcon from "@material-ui/icons/Search";
@@ -14,11 +15,9 @@ const Home = () => {
   const dispatch = useDispatch();
   const video = useSelector((state) => state.weather.video);
 
-  console.log(inputValue);
-
   return (
     <>
-      <div class="night-mode">
+      <div>
         <div className={classes.bgVideo}>
           <Clip />
         </div>
@@ -28,7 +27,7 @@ const Home = () => {
             {inputValue && (
               <CloseIcon
                 className={classes.closeBtn}
-                onClick={(e) => {
+                onClick={() => {
                   setInputValue("");
                 }}
               />

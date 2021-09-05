@@ -25,9 +25,6 @@ const Weather = () => {
 
   const dispatch = useDispatch();
 
-  console.log("name", weather.name);
-  console.log("city", city);
-
   const api = {
     // key: "f87193c8c1fceec76b7fc9727dfdd1da",
     // key2: "b74f11c310e27f2b0b26642921ffe8ca",
@@ -71,9 +68,11 @@ const Weather = () => {
     });
   }
 
-  let time = localTime(hourlyWeather).slice(0, 2);
-  let time2 = localTime(hourlyWeather).slice(3);
-  let time3 = time2[0] === "0" ? time2.slice(1) : time2;
+  let timeForHour = localTime(hourlyWeather).slice(0, 2);
+  let timeForMinute =
+    localTime(hourlyWeather).slice(3)[0] === "0"
+      ? localTime(hourlyWeather).slice(3).slice(1)
+      : localTime(hourlyWeather).slice(3);
 
   let regionNames = new Intl.DisplayNames(["en"], { type: "region" });
 
@@ -87,16 +86,16 @@ const Weather = () => {
     });
   }
 
-  const handleClose = () => {
+  const modalCloseHandler = () => {
     setShowModal(false);
   };
 
   return (
     <>
       {showModal && (
-        <Modal open={showModal} onClose={handleClose}>
+        <Modal open={showModal} onClose={modalCloseHandler}>
           <div className={classes.modalContainer}>
-            <div className={classes.closeBtn} onClick={handleClose}>
+            <div className={classes.closeBtn} onClick={modalCloseHandler}>
               <CloseIcon />
             </div>
             <p>Invalid city name. Please search again</p>
@@ -114,15 +113,15 @@ const Weather = () => {
                 }
               >
                 Local time:
-                {time <= 9
-                  ? time.slice(1, 2) + ":" + time3 + "am"
-                  : time >= 10 && time <= 11
-                  ? time + ":" + time3 + "am"
-                  : time === 12
-                  ? time + ":" + time3 + "pm"
-                  : time >= 13 && time <= 23
-                  ? time - 12 + ":" + time3 + "pm"
-                  : (time = 12 + ":" + time3 + "am")}
+                {timeForHour <= 9
+                  ? timeForHour.slice(1, 2) + ":" + timeForMinute + "am"
+                  : timeForHour >= 10 && timeForHour <= 11
+                  ? timeForHour + ":" + timeForMinute + "am"
+                  : timeForHour === 12
+                  ? timeForHour + ":" + timeForMinute + "pm"
+                  : timeForHour >= 13 && timeForHour <= 23
+                  ? timeForHour - 12 + ":" + timeForMinute + "pm"
+                  : (timeForHour = 12 + ":" + timeForMinute + "am")}
                 , {localDate(hourlyWeather)}
               </p>
             </div>
@@ -163,7 +162,7 @@ const Weather = () => {
                     °F
                   </button>
                 </div>
-                <div class="content">
+                <div>
                   <p>{weather.weather && weather.weather[0].main}</p>
                   <p>
                     feels like{" "}
@@ -218,11 +217,6 @@ const Weather = () => {
               />
             </div>
           </div>
-          <div className={(classes.modalContainer, classes.hidden)}>
-            <i class="fas fa-times closeBtn"></i>
-            <div class="modal"></div>
-          </div>
-          <div className={(classes.overlay, classes.hidden)}></div>
         </div>
       )}
     </>

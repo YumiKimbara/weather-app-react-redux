@@ -46,7 +46,7 @@ const WeeklyWeather = ({ celsiusForWeeklyWeather }) => {
     <>
       {weeklyWeather.daily &&
         weeklyWeather.daily.map((_, i) => {
-          const localDate2 = (d) => {
+          const localDate = (d) => {
             const tomorrow = new Date();
             tomorrow.setDate(tomorrow.getDate() + i);
             return tomorrow.toLocaleDateString("en-US", {
@@ -59,14 +59,14 @@ const WeeklyWeather = ({ celsiusForWeeklyWeather }) => {
 
           return (
             <div>
-              <div className={classes.content}>
+              <div className={classes.weeklyContent}>
                 <p>Max: {Math.round(weeklyWeather.daily[i].temp.max)}°</p>
                 <p>Min: {Math.round(weeklyWeather.daily[i].temp.min)}°</p>
                 <img
                   src={"//openweathermap.org/img/w/" + iconCode + ".png"}
                   class="weather-icons"
                 />
-                <p>{localDate2(weeklyWeather)}</p>
+                <p>{localDate(weeklyWeather)}</p>
               </div>
             </div>
           );
