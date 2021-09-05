@@ -27,7 +27,7 @@ const WeeklyWeather = ({ celsiusForWeeklyWeather }) => {
       )
         .then((res) => {
           if (!res.ok) {
-            alert("Something went wrong!");
+            console.log("Something went wrong");
           }
           res.json().then((dataWeek) => {
             dispatch(weatherActions.getWeeklyWeather(dataWeek));

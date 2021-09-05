@@ -128,7 +128,7 @@ const HourlyWeather = ({ celsiusForHourlyWeather }) => {
     )
       .then((res) => {
         if (!res.ok) {
-          alert("Something went wrong!");
+          alert("Something went wrong!!");
         }
         res.json().then((dataHour) => {
           dispatch(weatherActions.getHourlyWeather(dataHour));
