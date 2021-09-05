@@ -40,21 +40,6 @@ const Weather = () => {
       .then((res) => {
         if (res.status === 404) {
           setShowModal(true);
-          //   const modalContainer = document.querySelector(".modal-container");
-          //   const modal = document.querySelector(".modal");
-          //   const overlay = document.querySelector(".overlay");
-          //   const closeBtn = document.querySelector(".close-btn");
-          //   modalContainer.classList.remove("hidden");
-          //   overlay.classList.remove("hidden");
-          //   modal.innerHTML = "Invalid city name.<br />" + "Please search again.";
-          //   closeBtn.addEventListener("click", () => {
-          //     modalContainer.classList.add("hidden");
-          //     overlay.classList.add("hidden");
-          //   });
-          //   overlay.addEventListener("click", () => {
-          //     modalContainer.classList.add("hidden");
-          //     overlay.classList.add("hidden");
-          //   });
         }
         res.json().then((jsonData) => {
           dispatch(weatherActions.getWeather(jsonData));
@@ -183,14 +168,17 @@ const Weather = () => {
               </div>
             </div>
             <div>
-              <h3
-                class={
-                  (classes.subTitle,
-                  video.includes("night") ? classes.nightMode : classes.dayMode)
-                }
-              >
-                Hourly Forecast - {weather.name}
-              </h3>
+              <div className={classes.subTitle}>
+                <h3
+                  className={
+                    video.includes("night")
+                      ? classes.nightMode
+                      : classes.dayMode
+                  }
+                >
+                  Hourly Forecast - {weather.name}
+                </h3>
+              </div>
             </div>
             <div
               className={
@@ -202,13 +190,17 @@ const Weather = () => {
               />
             </div>
             <div>
-              <h3
-                class={
-                  video.includes("night") ? classes.nightMode : classes.dayMode
-                }
-              >
-                Weekly Forecast - {weather.name}
-              </h3>
+              <div className={classes.subTitle}>
+                <h3
+                  class={
+                    video.includes("night")
+                      ? classes.nightMode
+                      : classes.dayMode
+                  }
+                >
+                  Weekly Forecast - {weather.name}
+                </h3>
+              </div>
             </div>
             <div
               className={

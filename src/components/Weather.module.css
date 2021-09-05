@@ -3,10 +3,6 @@
   margin: 0 auto;
 }
 
-.subTitle {
-  margin-top: 2rem;
-}
-
 .currentTemp {
   font-size: 28px;
 }
@@ -68,6 +64,10 @@
   padding: 1rem;
   border-radius: 5px;
   width: 60%;
+}
+
+.subTitle {
+  margin-top: 2rem;
 }
 
 .nightMode {
