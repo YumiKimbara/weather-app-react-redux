@@ -136,7 +136,7 @@ const Weather = () => {
                     class={classes.tempButton}
                     type="button"
                     onClick={() => {
-                      getCurrentWeather("Vancouver", "metric");
+                      getCurrentWeather(city, "metric");
                       setCelsiusForHourlyWeather("metric");
                       setCelsiusForWeeklyWeather("metric");
                       setTemp("°C");
@@ -149,7 +149,7 @@ const Weather = () => {
                     class={classes.tempButton}
                     type="button"
                     onClick={() => {
-                      getCurrentWeather("Vancouver", "imperial");
+                      getCurrentWeather(city, "imperial");
                       setCelsiusForHourlyWeather("imperial");
                       setCelsiusForWeeklyWeather("imperial");
                       setTemp("°F");
