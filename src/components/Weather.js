@@ -25,6 +25,8 @@ const Weather = () => {
     useState("metric");
   const [temp, setTemp] = useState("°C");
   const [toggle, setToggle] = useState(true);
+  const [checkTemp, setCheckTemp] = useState("yes");
+
   const dispatch = useDispatch();
 
   const api = {
@@ -92,29 +94,32 @@ const Weather = () => {
     setShowModal(false);
   };
 
-  const sample = () => {
+  const tempToggleHandler = () => {
+    setToggle(!toggle);
     if (toggle) {
-      setCelsiusForCurrentWeather("imperial");
+      setCheckTemp("yes");
+      console.log(checkTemp);
+
+      setCelsiusForCurrentWeather("metric");
       setCelsiusForHourlyWeather("imperial");
       setCelsiusForWeeklyWeather("imperial");
       setTemp("°F");
     } else {
-      setCelsiusForCurrentWeather("metric");
+      setCheckTemp("no");
+      console.log(checkTemp);
+
+      setCelsiusForCurrentWeather("imperial");
       setCelsiusForHourlyWeather("metric");
       setCelsiusForWeeklyWeather("metric");
       setTemp("°C");
     }
-  };
-
-  const tempToggleHandler = (e) => {
-    setToggle(!toggle);
-    console.log(toggle);
+    getCurrentWeather(city, celsiusForCurrentWeather);
   };
 
   useState(() => {
     console.log("hi");
     getCurrentWeather(city, celsiusForCurrentWeather);
-  }, [toggle]);
+  }, [checkTemp]);
 
   return (
     <>
@@ -163,9 +168,9 @@ const Weather = () => {
                 </p>
                 <div>
                   <Switch
-                    checked={toggle.checkedA}
-                    onChange={tempToggleHandler}
-                    name="checkedA"
+                    checked={toggle}
+                    onChange={() => tempToggleHandler()}
+                    name="toggleTemp"
                     inputProps={{ "aria-label": "blue checkbox" }}
                   />
                 </div>
