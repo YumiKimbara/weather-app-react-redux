@@ -166,7 +166,7 @@ const Weather = () => {
                   {weather.main && Math.round(weather.main.temp)}
                   <span>{temp}</span>
                 </p>
-                <div>
+                <div className={classes.toggleBtn}>
                   <Switch
                     checked={toggle}
                     onChange={() => tempToggleHandler()}
