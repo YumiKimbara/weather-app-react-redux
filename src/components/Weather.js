@@ -24,10 +24,7 @@ const Weather = () => {
   const [celsiusForWeeklyWeather, setCelsiusForWeeklyWeather] =
     useState("metric");
   const [temp, setTemp] = useState("°C");
-  const [toggle, setToggle] = useState({
-    checkedA: true,
-    checkedB: true,
-  });
+  const [toggle, setToggle] = useState(true);
   const dispatch = useDispatch();
 
   const api = {
@@ -62,7 +59,6 @@ const Weather = () => {
   }, []);
 
   useEffect(() => {
-    //@@@
     getCurrentWeather(city, celsiusForCurrentWeather);
   }, [city]);
 
@@ -96,22 +92,29 @@ const Weather = () => {
     setShowModal(false);
   };
 
-  const tempToggleHandler = (e) => {
-    setToggle({ ...toggle, [e.target.name]: e.target.checked });
-    if (toggle.checkedA) {
-      setCelsiusForCurrentWeather("metric");
-      getCurrentWeather(city, celsiusForCurrentWeather);
+  const sample = () => {
+    if (toggle) {
+      setCelsiusForCurrentWeather("imperial");
       setCelsiusForHourlyWeather("imperial");
       setCelsiusForWeeklyWeather("imperial");
       setTemp("°F");
     } else {
-      setCelsiusForCurrentWeather("imperial");
-      getCurrentWeather(city, celsiusForCurrentWeather);
+      setCelsiusForCurrentWeather("metric");
       setCelsiusForHourlyWeather("metric");
       setCelsiusForWeeklyWeather("metric");
       setTemp("°C");
     }
   };
+
+  const tempToggleHandler = (e) => {
+    setToggle(!toggle);
+    console.log(toggle);
+  };
+
+  useState(() => {
+    console.log("hi");
+    getCurrentWeather(city, celsiusForCurrentWeather);
+  }, [toggle]);
 
   return (
     <>
