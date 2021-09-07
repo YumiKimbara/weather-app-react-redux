@@ -5,3 +5,14 @@
 .weeklyContent p {
   margin-top: 0.5rem;
 }
+
+@media (max-width: 540px) {
+  img {
+    width: 2.5rem;
+  }
+}
+@media (max-width: 320px) {
+  img {
+    width: 2rem;
+  }
+}

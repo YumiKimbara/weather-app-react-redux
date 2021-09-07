@@ -16,3 +16,15 @@ body a {
   text-decoration: none;
   color: #484848;
 }
+
+@media (max-width: 540px) {
+  body {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 320px) {
+  body {
+    font-size: 0.65rem;
+  }
+}

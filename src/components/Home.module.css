@@ -64,3 +64,48 @@ input[type="search"]:focus {
 .dayMode {
   color: #484848;
 }
+
+@media (max-width: 540px) {
+  input {
+    margin-top: 1rem;
+    height: 2rem;
+  }
+  .icon {
+    top: 3vh;
+  }
+  .closeBtn {
+    top: 3vh;
+  }
+}
+
+@media (max-width: 411px) {
+  .inputSection svg {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .icon {
+    top: 3.5vh;
+  }
+  .closeBtn {
+    top: 3.5vh;
+  }
+}
+
+@media (max-width: 320px) {
+  input {
+    height: 1.5rem;
+    font-size: 0.6rem;
+    padding-left: 2rem;
+  }
+  .inputSection svg {
+    font-size: 0.8rem;
+  }
+  .icon {
+    top: 3.7vh;
+  }
+  .closeBtn {
+    top: 3.7vh;
+  }
+}

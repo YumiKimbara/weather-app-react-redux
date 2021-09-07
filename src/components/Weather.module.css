@@ -65,3 +65,31 @@
 .subTitle {
   margin-top: 2rem;
 }
+
+@media (max-width: 1024px) {
+  .modalContainer {
+    width: 50vw;
+    top: 40%;
+  }
+}
+
+@media (max-width: 540px) {
+  .contentWrapper {
+    width: 70%;
+  }
+  .subTitle {
+    margin-top: 1rem;
+  }
+  .modalContainer {
+    font-size: 0.9rem;
+  }
+  .modalContainer svg {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .currentTemp {
+    font-size: 20px;
+  }
+}
