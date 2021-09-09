@@ -5,7 +5,7 @@ const initialWeatherState = {
   fetchedHoulyData: [],
   fetchedWeeklyData: [],
   city: "Vancouver",
-  video: "/bg-video/sunny.mp4",
+  video: "",
 };
 
 const weatherSlice = createSlice({
