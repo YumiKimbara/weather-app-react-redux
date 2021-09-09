@@ -145,7 +145,7 @@ const Weather = () => {
                 </p>
                 <div className={classes.toggleBtn}>
                   <button
-                    class={classes.tempButton}
+                    className={classes.tempButton}
                     type="button"
                     onClick={() => {
                       getCurrentWeather(city, "metric");
@@ -158,7 +158,7 @@ const Weather = () => {
                   </button>
                   <span className={classes.buttonLine}>/</span>
                   <button
-                    class={classes.tempButton}
+                    className={classes.tempButton}
                     type="button"
                     onClick={() => {
                       getCurrentWeather(city, "imperial");

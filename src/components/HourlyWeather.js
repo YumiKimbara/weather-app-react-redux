@@ -4,6 +4,8 @@ import { weatherActions } from "../store/weather";
 
 import classes from "./HourlyWeather.module.css";
 
+import { v4 as uuidv4 } from "uuid";
+
 const HourlyWeather = ({ celsiusForHourlyWeather }) => {
   const weather = useSelector((state) => state.weather.fetchedData);
   const hourlyWeather = useSelector((state) => state.weather.fetchedHoulyData);
@@ -149,14 +151,14 @@ const HourlyWeather = ({ celsiusForHourlyWeather }) => {
     <>
       {hourlyWeather.hourly &&
         allTime.map((item, i) => {
+          const uniqueID = uuidv4();
           const iconCodes =
             hourlyWeather.hourly && hourlyWeather.hourly[i].weather[0].icon;
           return (
-            <div className={classes.hourlyContent}>
+            <div key={uniqueID} className={classes.hourlyContent}>
               <p>{Math.round(hourlyWeather.hourly[i].temp)}°</p>
               <img
                 src={"https://openweathermap.org/img/w/" + iconCodes + ".png"}
-                class="weather-icons"
               />
               {item <= 11 ? (
                 <p>{item} am</p>

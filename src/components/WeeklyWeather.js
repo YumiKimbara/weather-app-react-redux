@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { weatherActions } from "../store/weather";
 
+import { v4 as uuidv4 } from "uuid";
+
 import classes from "./WeeklyWeather.module.css";
 
 const WeeklyWeather = ({ celsiusForWeeklyWeather }) => {
@@ -46,6 +48,7 @@ const WeeklyWeather = ({ celsiusForWeeklyWeather }) => {
     <>
       {weeklyWeather.daily &&
         weeklyWeather.daily.map((_, i) => {
+          const uniqueID = uuidv4();
           const localDate = (d) => {
             const tomorrow = new Date();
             tomorrow.setDate(tomorrow.getDate() + i);
@@ -58,14 +61,11 @@ const WeeklyWeather = ({ celsiusForWeeklyWeather }) => {
           let iconCode = weeklyWeather.daily[i].weather[0].icon;
 
           return (
-            <div>
+            <div key={uniqueID}>
               <div className={classes.weeklyContent}>
                 <p>Max: {Math.round(weeklyWeather.daily[i].temp.max)}°</p>
                 <p>Min: {Math.round(weeklyWeather.daily[i].temp.min)}°</p>
-                <img
-                  src={"//openweathermap.org/img/w/" + iconCode + ".png"}
-                  class="weather-icons"
-                />
+                <img src={"//openweathermap.org/img/w/" + iconCode + ".png"} />
                 <p>{localDate(weeklyWeather)}</p>
               </div>
             </div>
