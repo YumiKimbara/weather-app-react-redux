@@ -25,6 +25,14 @@ const Clip = () => {
     previousUrl.current = video;
   }, [video]);
 
+  // const iphoneVideo = document.querySelector("video");
+  // enableInlineVideo(iphoneVideo);
+
+  // enableInlineVideo(iphoneVideo);
+  // iphoneVideo.addEventListener("touchstart", function () {
+  //   iphoneVideo.play();
+  // });
+
   return (
     <video
       ref={videoRef}
