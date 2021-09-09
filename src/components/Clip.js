@@ -34,18 +34,34 @@ const Clip = () => {
   // });
 
   return (
+    <div
+      dangerouslySetInnerHTML={{
+        __html: `
     <video
       ref={videoRef}
-      className={classes.bgVideoContent}
-      playsInline
-      autoPlay
-      muted
+      class={bgVideoContent}
       loop
-    >
-      <source src={video} type="video/mp4" />
-      Your browser is not supported!
-    </video>
+      muted
+      autoplay
+      playsinline
+      src="${video}"
+    />,
+  `,
+      }}
+    ></div>
   );
 };
 
 export default Clip;
+
+// <video
+//       ref={videoRef}
+//       className={classes.bgVideoContent}
+//       playsInline
+//       autoPlay
+//       muted
+//       loop
+//     >
+//       <source sCrc={video} type="video/mp4" />
+//       Your browser is not supported!
+//     </video>
