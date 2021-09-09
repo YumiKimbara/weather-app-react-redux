@@ -106,8 +106,13 @@ const Weather = () => {
             <div className={classes.closeBtn} onClick={modalCloseHandler}>
               <CloseIcon />
             </div>
-            <p>Invalid city name. Please search again</p>
-            <SentimentVeryDissatisfiedIcon />
+            <div>
+              <p>Invalid city name.</p>
+              <p>
+                Please search again
+                <SentimentVeryDissatisfiedIcon />
+              </p>
+            </div>
           </div>
         </Modal>
       )}

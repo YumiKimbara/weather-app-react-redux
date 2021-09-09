@@ -1,5 +1,5 @@
 .modalContainer {
-  width: 35vw;
+  width: 30vw;
   height: 35vh;
   padding: 1rem;
   color: #484848;
@@ -34,14 +34,14 @@
   color: white;
   display: flex;
   justify-content: space-between;
-  overflow: scroll;
+  overflow: overlay;
 }
 
 .dayMode {
   color: #484848;
   display: flex;
   justify-content: space-between;
-  overflow: scroll;
+  overflow: overlay;
 }
 
 .mainContentWrapper {
@@ -83,8 +83,8 @@
 
 @media (max-width: 1024px) {
   .modalContainer {
-    width: 50vw;
     top: 40%;
+    height: 25vh;
   }
 }
 
@@ -103,13 +103,24 @@
   }
 }
 
+@media (max-width: 414px) {
+  .modalContainer {
+    width: 40vw;
+    height: 20vh;
+  }
+  .tempButton {
+    font-size: 10px;
+    width: 2rem;
+    padding: 1px;
+  }
+}
+
 @media (max-width: 320px) {
   .currentTemp {
     font-size: 20px;
   }
   .tempButton {
     font-size: 8px;
-    width: 2rem;
-    padding: 2px;
+    width: 1.5rem;
   }
 }
