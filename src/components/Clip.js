@@ -8,8 +8,6 @@ const Clip = () => {
   const videoRef = useRef();
   const previousUrl = useRef(video);
 
-  console.log("ref", videoRef, previousUrl);
-
   useEffect(() => {
     // ignore if the previous url is same as video url
     if (previousUrl.current === video) {
@@ -34,7 +32,7 @@ const Clip = () => {
       muted
       loop
     >
-      <source sCrc={video} type="video/mp4" />
+      <source src={video} type="video/mp4" />
       Your browser is not supported!
     </video>
   );
