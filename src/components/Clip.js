@@ -25,43 +25,19 @@ const Clip = () => {
     previousUrl.current = video;
   }, [video]);
 
-  // const iphoneVideo = document.querySelector("video");
-  // enableInlineVideo(iphoneVideo);
-
-  // enableInlineVideo(iphoneVideo);
-  // iphoneVideo.addEventListener("touchstart", function () {
-  //   iphoneVideo.play();
-  // });
-
   return (
-    <div
-      dangerouslySetInnerHTML={{
-        __html: `
     <video
       ref={videoRef}
-      class={bgVideoContent}
-      loop
+      className={classes.bgVideoContent}
+      playsInline
+      autoPlay
       muted
-      autoplay
-      playsinline
-      src="${video}"
-    />,
-  `,
-      }}
-    ></div>
+      loop
+    >
+      <source sCrc={video} type="video/mp4" />
+      Your browser is not supported!
+    </video>
   );
 };
 
 export default Clip;
-
-// <video
-//       ref={videoRef}
-//       className={classes.bgVideoContent}
-//       playsInline
-//       autoPlay
-//       muted
-//       loop
-//     >
-//       <source sCrc={video} type="video/mp4" />
-//       Your browser is not supported!
-//     </video>
