@@ -29,6 +29,7 @@ const Clip = () => {
     <video
       ref={videoRef}
       className={classes.bgVideoContent}
+      playsinline
       autoPlay
       muted
       loop
