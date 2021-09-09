@@ -33,6 +33,7 @@ const Home = () => {
               />
             )}
             <form
+              //if Enter key was pushed, store city name
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   dispatch(weatherActions.getCity(inputValue));
@@ -62,6 +63,7 @@ const Home = () => {
 
       <div className={classes.attribute}>
         <p
+          //change font color depends on the background
           className={
             video.includes("night") ? classes.nightMode : classes.dayMode
           }

@@ -20,6 +20,7 @@ const WeeklyWeather = ({ celsiusForWeeklyWeather }) => {
     base: "https://api.openweathermap.org/data/2.5/",
   };
 
+  //get weekly weather
   const getWeeklyWeather = (data, units) => {
     weather &&
       fetch(
@@ -40,6 +41,7 @@ const WeeklyWeather = ({ celsiusForWeeklyWeather }) => {
         });
   };
 
+  //whenever weather changes, update weekly weather
   useEffect(() => {
     getWeeklyWeather(weather, celsiusForWeeklyWeather);
   }, [weather]);
@@ -58,6 +60,7 @@ const WeeklyWeather = ({ celsiusForWeeklyWeather }) => {
             });
           };
 
+          //get weather icon
           let iconCode = weeklyWeather.daily[i].weather[0].icon;
 
           return (

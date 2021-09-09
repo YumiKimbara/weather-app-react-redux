@@ -30,6 +30,7 @@ const HourlyWeather = ({ celsiusForHourlyWeather }) => {
 
   const changeBackground = (dataHour) => {
     const weatherCondition = dataHour.current.weather[0].main;
+    //get current time
     const currentTime = +localTimeForCurrentTime(dataHour).slice(0, 2);
 
     if (
@@ -105,6 +106,7 @@ const HourlyWeather = ({ celsiusForHourlyWeather }) => {
     }
   };
 
+  //fetch hourly weather
   function getHourlyWeather(data, units) {
     fetch(
       data.coord &&
@@ -124,6 +126,7 @@ const HourlyWeather = ({ celsiusForHourlyWeather }) => {
       });
   }
 
+  //whenever weather changes, update the houly weather
   useEffect(() => {
     getHourlyWeather(weather, celsiusForHourlyWeather);
   }, [weather]);
@@ -152,6 +155,7 @@ const HourlyWeather = ({ celsiusForHourlyWeather }) => {
       {hourlyWeather.hourly &&
         allTime.map((item, i) => {
           const uniqueID = uuidv4();
+          //get weather icons
           const iconCodes =
             hourlyWeather.hourly && hourlyWeather.hourly[i].weather[0].icon;
           return (

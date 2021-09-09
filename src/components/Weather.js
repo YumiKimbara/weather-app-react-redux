@@ -7,7 +7,7 @@ import HourlyWeather from "./HourlyWeather";
 
 import classes from "./Weather.module.css";
 
-import { Modal, Switch } from "@material-ui/core";
+import { Modal } from "@material-ui/core";
 import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
 import CloseIcon from "@material-ui/icons/Close";
 
@@ -24,8 +24,6 @@ const Weather = () => {
   const [celsiusForWeeklyWeather, setCelsiusForWeeklyWeather] =
     useState("metric");
   const [temp, setTemp] = useState("°C");
-  const [toggle, setToggle] = useState(true);
-  const [checkTemp, setCheckTemp] = useState("yes");
 
   const dispatch = useDispatch();
 
@@ -37,6 +35,7 @@ const Weather = () => {
     base: "https://api.openweathermap.org/data/2.5/",
   };
 
+  //get current weather
   function getCurrentWeather(query, units) {
     fetch(
       `${api.base}weather?q=${query}&units=${units}&id=524901&appid=${api.key}`
@@ -60,6 +59,7 @@ const Weather = () => {
     getCurrentWeather("Vancouver", "metric");
   }, []);
 
+  //whenever city changes, update current weather
   useEffect(() => {
     getCurrentWeather(city, celsiusForCurrentWeather);
   }, [city]);
@@ -93,10 +93,6 @@ const Weather = () => {
   const modalCloseHandler = () => {
     setShowModal(false);
   };
-
-  // useState(() => {
-  //   getCurrentWeather(city, celsiusForCurrentWeather);
-  // }, [checkTemp]);
 
   return (
     <>
@@ -149,6 +145,7 @@ const Weather = () => {
                   <span>{temp}</span>
                 </p>
                 <div className={classes.toggleBtn}>
+                  {/* change from °C to °F */}
                   <button
                     className={classes.tempButton}
                     type="button"
@@ -162,6 +159,7 @@ const Weather = () => {
                     °C
                   </button>
                   <span className={classes.buttonLine}>/</span>
+                  {/* change from °F to °C */}
                   <button
                     className={classes.tempButton}
                     type="button"
@@ -237,10 +235,3 @@ const Weather = () => {
 };
 
 export default Weather;
-
-// <Switch
-//                     checked={toggle}
-//                     onChange={() => tempToggleHandler()}
-//                     name="toggleTemp"
-//                     inputProps={{ "aria-label": "blue checkbox" }}
-//                   />
