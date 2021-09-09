@@ -94,32 +94,9 @@ const Weather = () => {
     setShowModal(false);
   };
 
-  const tempToggleHandler = () => {
-    setToggle(!toggle);
-    if (toggle) {
-      setCheckTemp("yes");
-      console.log(checkTemp);
-
-      setCelsiusForCurrentWeather("metric");
-      setCelsiusForHourlyWeather("imperial");
-      setCelsiusForWeeklyWeather("imperial");
-      setTemp("°F");
-    } else {
-      setCheckTemp("no");
-      console.log(checkTemp);
-
-      setCelsiusForCurrentWeather("imperial");
-      setCelsiusForHourlyWeather("metric");
-      setCelsiusForWeeklyWeather("metric");
-      setTemp("°C");
-    }
-    getCurrentWeather(city, celsiusForCurrentWeather);
-  };
-
-  useState(() => {
-    console.log("hi");
-    getCurrentWeather(city, celsiusForCurrentWeather);
-  }, [checkTemp]);
+  // useState(() => {
+  //   getCurrentWeather(city, celsiusForCurrentWeather);
+  // }, [checkTemp]);
 
   return (
     <>
@@ -167,12 +144,31 @@ const Weather = () => {
                   <span>{temp}</span>
                 </p>
                 <div className={classes.toggleBtn}>
-                  <Switch
-                    checked={toggle}
-                    onChange={() => tempToggleHandler()}
-                    name="toggleTemp"
-                    inputProps={{ "aria-label": "blue checkbox" }}
-                  />
+                  <button
+                    class={classes.tempButton}
+                    type="button"
+                    onClick={() => {
+                      getCurrentWeather(city, "metric");
+                      setCelsiusForHourlyWeather("metric");
+                      setCelsiusForWeeklyWeather("metric");
+                      setTemp("°C");
+                    }}
+                  >
+                    °C
+                  </button>
+                  <span className={classes.buttonLine}>/</span>
+                  <button
+                    class={classes.tempButton}
+                    type="button"
+                    onClick={() => {
+                      getCurrentWeather(city, "imperial");
+                      setCelsiusForHourlyWeather("imperial");
+                      setCelsiusForWeeklyWeather("imperial");
+                      setTemp("°F");
+                    }}
+                  >
+                    °F
+                  </button>
                 </div>
                 <div>
                   <p>{weather.weather && weather.weather[0].main}</p>
@@ -236,3 +232,10 @@ const Weather = () => {
 };
 
 export default Weather;
+
+// <Switch
+//                     checked={toggle}
+//                     onChange={() => tempToggleHandler()}
+//                     name="toggleTemp"
+//                     inputProps={{ "aria-label": "blue checkbox" }}
+//                   />
