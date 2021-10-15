@@ -1,3 +1,5 @@
+# Weather App
+
 This app can access current, hourly and weekly weather data from around the world with Weather API. The background video will be changed depends on the current weather and time. Also you can change from celsius to fahrenheit.
 
 <img src="public/images/weather.gif" width="700px"/>
